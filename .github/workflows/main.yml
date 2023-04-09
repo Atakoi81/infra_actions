@@ -1,18 +1,29 @@
 # .github/workflows/**main.yml**
+# название воркфлоу
 name: Django-app workflow
+# https://docs.github.com/en/actions/creating-actions/about-custom-actions#
+# types-of-actions
 
+# воркфлоу включается по событию push, можно также задавать параметры пуша
+# см. пример ниже.
+# другие события смотри
+# https://docs.github.com/en/actions/reference/events-that-trigger-workflows
 on: [push]
 
 jobs:
   tests:
     # «Раннер» — создание изолированного окружения с последней версией Ubuntu 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # runs-on (ключ) - базовый слой (в терминологии
+    # Docker) или runner в терминлогии GitHub Actions
 
-    steps:
+    steps:  # ключ шаги
     # Запуск actions checkout — готового скрипта 
     # для клонирования репозитория
+    # Вместо run можно применять uses — для вызова actions. Actions — это
+    # скрипты, которые можно написать заранее и вызывать по имени из разных
+    # workflow.
     - uses: actions/checkout@v2
-    - name: Set up Python
+    - name: Set up Python  # имя шага (произвольное, смысл!)
       # Запуск actions setup-python — готового скрипта 
       # для развёртывания окружения Python
       uses: actions/setup-python@v2
@@ -21,7 +32,8 @@ jobs:
         python-version: 3.7
 
     - name: Install dependencies
-      run: | 
+      # в ключе run записываются команды для терминала окружения
+      run: | # | - символ последовательного выполнения
         # обновление pip
         python -m pip install --upgrade pip 
         # установка flake8 и его плагинов
@@ -44,8 +56,8 @@ jobs:
 # # events but only for the master branch
 # on:
 #   push:
-#     branches: [ main ]
-#   pull_request:
+#     branches: [ main ]  # можно указать и несколько веток
+#   pull_request:  # сработает, когда кто-то сделает запрос на изменение кода в ветке main
 #     branches: [ main ]
 
 # # A workflow run is made up of one or more jobs that can run sequentially or in parallel
