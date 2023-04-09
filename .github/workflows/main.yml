@@ -99,6 +99,7 @@ jobs:
             sudo docker stop $(sudo docker ps -a -q)
             sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/infra_actions
 
+
 #____________________________________________________________________________________________
 # # This is a basic workflow to help you get started with Actions
 
