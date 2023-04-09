@@ -90,6 +90,7 @@ jobs:
           # в репу, settings, secrets)
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
+          # cat ~/.ssh/id_rsa (в терминале компа)! Копировать вместе с BEGIN, END
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }} # Если ваш ssh-ключ защищён фразой-паролем
           script: |
